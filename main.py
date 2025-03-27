@@ -413,8 +413,6 @@ else:
 =======
 import streamlit as st
 from streamlit_option_menu import option_menu
-import os
-from dotenv import load_dotenv
 from supabase import create_client
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -425,16 +423,15 @@ import plotly.express as px
 import bcrypt
 
 # Load environment variables
-load_dotenv()
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_API_KEY")
+SUPABASE_URL = st.secrets["supabase"]["url"]
+SUPABASE_KEY = st.secrets["supabase"]["api_key"]
 
 # Initialize Supabase client
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # Retrieve credentials
-USERNAME = os.getenv("ST_USERNAME")
-PASSWORD_HASH = os.getenv("ST_PASSWORD_HASH").encode()  # Convert to bytes for bcrypt
+USERNAME = st.secrets["auth"]["username"]
+PASSWORD_HASH = st.secrets["auth"]["password_hash"].encode()  # Convert to bytes for bcrypt
 
 #########################################
 #### Page Configuration

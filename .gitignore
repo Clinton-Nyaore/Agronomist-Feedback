@@ -1,3 +1,6 @@
 # env variables
 .env
 .venv
+
+# Streamlit secrets
+.streamlit/secrets.toml
